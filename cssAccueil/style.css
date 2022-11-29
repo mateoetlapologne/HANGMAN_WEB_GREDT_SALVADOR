@@ -1,0 +1,13 @@
+/* styles.css */
+
+
+a{
+    text-decoration: none;
+}
+.available{
+    color: green;
+}
+.not-available{
+    color: red;
+}
+    
