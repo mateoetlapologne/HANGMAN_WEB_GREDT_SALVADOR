@@ -11,18 +11,9 @@
     {{if .Success}}
         <h1>Bienvenue {{.FirstName}} {{.LastName}}<br>
         Choissisez un niveau de difficulté</h1>
-        {{if eq .Difficulte "Facile"}}
-            <p>Difficulté facile</p>
-            <a href="Page/facile.html" target="_blank">Facile</a> <br>
-
-        {{else if eq .Difficulte "Normale"}}
-            <p>Difficulté normale</p>
-            <a href="Page/normale.html" target="_blank">Normale</a> <br>
-
-        {{else if eq .Difficulte "Difficile"}}
-            <p>Difficulté difficile</p>
-            <a href="Page/difficile.html" target="_blank">Difficile</a> <br>
-        {{end}}
+            <button class = "difficulte" >Facile</button> <br>
+            <button class = "difficulte" >Normale</button> <br>
+            <button class = "difficulte" >Difficile</button> <br>
     {{else}}
         <h1>Bienvenue sur le jeu du pendu !<br>
             Veuillez remplir les champs ci-dessous pour jouer </h1>
@@ -31,9 +22,7 @@
             <input type="text" name="lastname"><br />
             <label>Prénom:</label><br />
             <input type="text" name="firstname"><br />
-            <button class = "difficulte" >Facile</button>
-            <button class = "difficulte" >Normale</button>
-            <button class = "difficulte" >Difficile</button>
+            <input type="submit" value="jouer">
         </form>
     {{end}}
     <a href="/">Retour à l'accueil</a>
