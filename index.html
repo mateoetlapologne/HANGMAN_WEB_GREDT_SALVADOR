@@ -9,22 +9,36 @@
 </head>
 <body>
     {{if .Success}}
-        <h1>Bienvenue {{.FirstName}} {{.LastName}}<br>
-        Choissisez un niveau de difficulté</h1>
-            <button class = "difficulte" >Facile</button> <br>
-            <button class = "difficulte" >Normale</button> <br>
-            <button class = "difficulte" >Difficile</button> <br>
+    <div class="background">
+        <div class = "titre">
+            <h1>Bienvenue {{.FirstName}} {{.LastName}} <br>
+                Choisissez la difficulté pour commencer à jouer
+            </h1>
+        </div>
+
+        <div class="Gauche">
+            <button class = "difficulte" onclick="window.location.href = 'Page/facile.html'">Facile</button> <br>
+        </div>
+        <div class="Centre">
+            <button class = "difficulte" onclick="window.location.href = 'Page/normale.html'">Normale</button> <br>
+            <a href="/">Retour à l'accueil</a>
+        </div>
+        <div class="Droite">
+            <button class = "difficulte" onclick="window.location.href = 'Page/difficile.html'">Difficile</button> <br>
+        </div>
+    </div>
     {{else}}
         <h1>Bienvenue sur le jeu du pendu !<br>
             Veuillez remplir les champs ci-dessous pour jouer </h1>
-        <form method="POST">
-            <label>Nom:</label><br />
-            <input type="text" name="lastname"><br />
-            <label>Prénom:</label><br />
-            <input type="text" name="firstname"><br />
-            <input type="submit" value="jouer">
-        </form>
+        <div class = "formulaire">
+            <form method="POST">
+                <label>Nom:</label>
+                <input type="text" name="lastname"><br />
+                <label>Prénom:</label> 
+                <input type="text" name="firstname"><br />
+                <input class = "jouer" type="submit" size = 50 value="jouer">
+            </form>
+        </div>
     {{end}}
-    <a href="/">Retour à l'accueil</a>
 </body>
 </html>
