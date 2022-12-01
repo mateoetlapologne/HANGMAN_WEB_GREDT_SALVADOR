@@ -5,40 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Jeu du pendu</title>
 </head>
 <body>
-    {{if .Success}}
-    <div class="background">
-        <div class = "titre">
-            <h1>Bienvenue {{.FirstName}} {{.LastName}} <br>
-                Choisissez la difficulté pour commencer à jouer
-            </h1>
-        </div>
-
-        <div class="Gauche">
-            <button class = "difficulte" onclick="window.location.href = 'Page/facile.html'">Facile</button> <br>
-        </div>
-        <div class="Centre">
-            <button class = "difficulte" onclick="window.location.href = 'Page/normale.html'">Normale</button> <br>
-            <a href="/">Retour à l'accueil</a>
-        </div>
-        <div class="Droite">
-            <button class = "difficulte" onclick="window.location.href = 'Page/difficile.html'">Difficile</button> <br>
-        </div>
+    <h1>Bienvenue sur le jeu du pendu !<br>
+        Veuillez remplir les champs ci-dessous pour jouer </h1>
+    <div class = "formulaire">
+        <form action="game.html" method="POST">
+            <label>Pseudo:</label>
+            <input type="text" name="username"><br />
+            <select name="difficulty" id="difficulty" required>
+                <option value="">Choisissez votre difficultée</option>
+                <option value="Facile">Facile</option>
+                <option value="Normale">Normale</option>
+                <option value="Difficile">Difficile</option>
+                
+            </select>
+            <input class = "jouer" type="submit" size = 50 value="jouer">
+        </form>
     </div>
-    {{else}}
-        <h1>Bienvenue sur le jeu du pendu !<br>
-            Veuillez remplir les champs ci-dessous pour jouer </h1>
-        <div class = "formulaire">
-            <form method="POST">
-                <label>Nom:</label>
-                <input type="text" name="lastname"><br />
-                <label>Prénom:</label> 
-                <input type="text" name="firstname"><br />
-                <input class = "jouer" type="submit" size = 50 value="jouer">
-            </form>
-        </div>
-    {{end}}
 </body>
 </html>
