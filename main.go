@@ -13,7 +13,7 @@ type User struct {
 }
 
 func main() {
-	tmpl := template.Must(template.ParseGlob("*.html"))
+	tmpl := template.Must(template.ParseGlob("index.html"))
 	fs := http.FileServer(http.Dir("css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

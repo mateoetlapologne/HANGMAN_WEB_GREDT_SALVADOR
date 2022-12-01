@@ -7,11 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partie en cours</title>
 </head>
-
-<div class="background">
-    <div class = "titre">
-        <h1>Bienvenue {{.Username}} <br>
-            vous avez choisi la difficulte {{.Difficulty}}<br>
-        </h1>
+<body>
+    <div class="background">
+        <div class = "titre">
+            <h1>Bienvenue {{.Username}} <br>
+                vous avez choisi la difficulte {{.Difficulty}}<br>
+            </h1>
+        </div>
     </div>
-</div>
+    <div class = "formulaire">
+        <form action="game.html" method="POST">
+            <label>Proposez une lettre:</label>
+            <input type="text" name="letter" required><br />
+            <input class = "Essayer une lettre" type="submit" size = 20 value="jouer">
+        </form>
+    </div>
+</body>
