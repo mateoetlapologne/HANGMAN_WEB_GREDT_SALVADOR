@@ -8,27 +8,24 @@ import (
 )
 
 type User struct {
-	Email     string
-	LastName  string
-	FirstName string
-	Success   bool
+	Username   string
+	Difficulty string
 }
 
 func main() {
-	tmpl1 := template.Must(template.ParseFiles("index.html"))
+	tmpl := template.Must(template.ParseGlob("*.html"))
 	fs := http.FileServer(http.Dir("css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
-			tmpl1.Execute(w, nil)
+			tmpl.Execute(w, nil)
 			return
 		}
 		details := User{
-			LastName:  r.FormValue("lastname"),
-			FirstName: r.FormValue("firstname"),
-			Success:   true,
+			Username:   r.FormValue("username"),
+			Difficulty: r.FormValue("difficulty"),
 		}
-		tmpl1.Execute(w, details)
+		tmpl.Execute(w, details)
 	})
 	http.ListenAndServe(":80", nil)
 }
