@@ -16,7 +16,7 @@ type User struct {
 func main() {
 	fs := http.FileServer(http.Dir("css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
-	tmpl := template.Must(template.ParseGlob("index.html"))
+	tmpl := template.Must(template.ParseFiles("index.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			tmpl.Execute(w, nil)
@@ -29,7 +29,7 @@ func main() {
 		tmpl.Execute(w, details)
 	})
 
-	tmp2 := template.Must(template.ParseGlob("game.html"))
+	tmp2 := template.Must(template.ParseFiles("game.html"))
 	http.HandleFunc("/game", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			tmpl.Execute(w, nil)
