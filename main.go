@@ -10,12 +10,13 @@ type User struct {
 	Username   string
 	Difficulty string
 	TryNumber  int
+	LetterTry  []string
 	Success    bool
 }
 
 var details = User{
-	Username:  "",
 	TryNumber: 10,
+	LetterTry: []string{},
 	Success:   false,
 }
 
@@ -44,11 +45,15 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func gameHandler(w http.ResponseWriter, r *http.Request) {
+	details.Success = false
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
+	// details.TryNumber -= 1
+	// details.LetterTry = append(details.LetterTry, r.FormValue("LetterTry"))
 	fmt.Println(details.Username)
 	fmt.Println(details.Difficulty)
 	fmt.Println(details.TryNumber)
+	fmt.Println(details.LetterTry)
 	tmpl1 := template.Must(template.ParseFiles("game.html"))
 	tmpl1.Execute(w, details)
 }
