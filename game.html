@@ -11,15 +11,15 @@
     <div class="background">
         <div class = "titre">
             <h1>Bienvenue {{.Username}} <br>
-                vous avez choisi la difficulte {{.Difficulty}}<br>
+                vous avez choisi la difficulte {{.Difficulte}}<br>
             </h1>
         </div>
-    </div>
-    <div class = "formulaire">
-        <form action="game.html" method="POST">
-            <label>Proposez une lettre:</label>
-            <input type="text" name="letter" required><br />
-            <input class = "Essayer une lettre" type="submit" size = 20 value="jouer">
-        </form>
+        <div class = "formulaire">
+            <form method="POST">
+                <label>Proposez une lettre:</label>
+                <input type="text" name="letter" required><br />
+                <input class = "Essayer une lettre" type="submit" size = 20 value="jouer">
+            </form>
+        </div>
     </div>
 </body>

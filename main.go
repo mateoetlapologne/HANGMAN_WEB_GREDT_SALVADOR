@@ -1,44 +1,48 @@
-// main.go
-
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 )
 
 type User struct {
-	Username   string
-	Difficulty string
+	Username string
+	Success  bool
+}
+
+var details = User{
+	Username: "none",
+	Success:  false,
 }
 
 func main() {
-	tmpl := template.Must(template.ParseGlob("index.html"))
+	fmt.Println("Server is running on port 80 http://localhost")
+	//gestion css
 	fs := http.FileServer(http.Dir("css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			tmpl.Execute(w, nil)
-			return
-		}
-		details := User{
-			Username:   r.FormValue("username"),
-			Difficulty: r.FormValue("difficulty"),
-		}
-		tmpl.Execute(w, details)
-	})
 
-	tmp2 := template.Must(template.ParseGlob("game.html"))
-	http.HandleFunc("/game", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			tmpl.Execute(w, nil)
-			return
-		}
-		details := User{
-			Username:   r.FormValue("username"),
-			Difficulty: r.FormValue("difficulty"),
-		}
-		tmpl.Execute(w, details)
-	})
+	//gestion html
+	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/game", gameHandler)
 	http.ListenAndServe(":80", nil)
+
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl1 := template.Must(template.ParseFiles("index.html"))
+	if r.Method != http.MethodPost {
+		tmpl1.Execute(w, nil)
+		return
+	}
+	details.Username = r.FormValue("difficulte")
+	fmt.Println(details.Username)
+	details.Success = true
+	tmpl1.Execute(w, details)
+
+}
+
+func gameHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl1 := template.Must(template.ParseFiles("game.html"))
+	tmpl1.Execute(w, details)
 }

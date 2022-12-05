@@ -11,17 +11,16 @@
     <h1>Bienvenue sur le jeu du pendu !<br>
         Veuillez remplir les champs ci-dessous pour jouer </h1>
     <div class = "formulaire">
-        <form action="game.html" method="POST">
-            <label>Pseudo:</label>
-            <input type="text" name="username" required><br />
-            <select name="difficulty" id="difficulty" required>
-                <option value="">Choisissez votre difficultée</option>
-                <option value="Facile">Facile</option>
-                <option value="Normale">Normale</option>
-                <option value="Difficile">Difficile</option>
-            </select>
-            <input class = "jouer" type="submit" size = 50 value="jouer">
+        <form method="POST" action = "/game">
+            <input type="radio" id="facile" name="difficulte" value="facile">
+            <label for="facile">Facile</label>
+            <input type="radio" id="moyen" name="difficulte" value="moyen" checked>
+            <label for="moyen">Moyen</label>
+            <input type="radio" id="difficile" name="difficulte" value="difficile">
+            <label for="difficile">Difficile</label>
+            <input type="submit" value="Choisir">
         </form>
     </div>
+
 </body>
 </html>
