@@ -4,6 +4,7 @@ package main
 
 import (
 	"html/template"
+	"log"
 	"net/http"
 )
 
@@ -13,9 +14,9 @@ type User struct {
 }
 
 func main() {
-	tmpl := template.Must(template.ParseGlob("index.html"))
 	fs := http.FileServer(http.Dir("css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
+	tmpl := template.Must(template.ParseGlob("index.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			tmpl.Execute(w, nil)
@@ -38,7 +39,7 @@ func main() {
 			Username:   r.FormValue("username"),
 			Difficulty: r.FormValue("difficulty"),
 		}
-		tmpl.Execute(w, details)
+		tmp2.Execute(w, details)
 	})
-	http.ListenAndServe(":80", nil)
+	log.Fatal(http.ListenAndServe(":80", nil))
 }
