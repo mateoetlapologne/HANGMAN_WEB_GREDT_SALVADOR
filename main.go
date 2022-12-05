@@ -9,12 +9,14 @@ import (
 type User struct {
 	Username   string
 	Difficulty string
+	TryNumber  int
 	Success    bool
 }
 
 var details = User{
-	Username: "",
-	Success:  false,
+	Username:  "",
+	TryNumber: 10,
+	Success:   false,
 }
 
 func main() {
@@ -27,7 +29,6 @@ func main() {
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/game", gameHandler)
 	http.ListenAndServe(":80", nil)
-
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -38,16 +39,16 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
-	fmt.Println(details.Username)
-	fmt.Println(details.Difficulty)
 	details.Success = true
 	tmpl1.Execute(w, details)
-
 }
 
 func gameHandler(w http.ResponseWriter, r *http.Request) {
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
+	fmt.Println(details.Username)
+	fmt.Println(details.Difficulty)
+	fmt.Println(details.TryNumber)
 	tmpl1 := template.Must(template.ParseFiles("game.html"))
 	tmpl1.Execute(w, details)
 }
