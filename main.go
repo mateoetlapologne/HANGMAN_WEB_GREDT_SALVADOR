@@ -27,5 +27,18 @@ func main() {
 		}
 		tmpl.Execute(w, details)
 	})
+
+	tmp2 := template.Must(template.ParseGlob("game.html"))
+	http.HandleFunc("/game", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			tmpl.Execute(w, nil)
+			return
+		}
+		details := User{
+			Username:   r.FormValue("username"),
+			Difficulty: r.FormValue("difficulty"),
+		}
+		tmpl.Execute(w, details)
+	})
 	http.ListenAndServe(":80", nil)
 }
