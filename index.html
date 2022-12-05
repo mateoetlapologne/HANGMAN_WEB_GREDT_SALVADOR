@@ -12,11 +12,13 @@
         Veuillez remplir les champs ci-dessous pour jouer </h1>
     <div class = "formulaire">
         <form method="POST" action = "/game">
-            <input type="radio" id="facile" name="difficulte" value="facile">
+            <label for="name">Entrez votre pseudo</label>
+            <input type="text" name="Username" id="Username" required>
+            <input type="radio" id="easy" name="Difficulty" value="facile">
             <label for="facile">Facile</label>
-            <input type="radio" id="moyen" name="difficulte" value="moyen" checked>
+            <input type="radio" id="normal" name="Difficulty" value="moyen" checked>
             <label for="moyen">Moyen</label>
-            <input type="radio" id="difficile" name="difficulte" value="difficile">
+            <input type="radio" id="hard" name="Difficulty" value="difficile">
             <label for="difficile">Difficile</label>
             <input type="submit" value="Choisir">
         </form>

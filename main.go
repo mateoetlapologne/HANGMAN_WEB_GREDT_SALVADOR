@@ -7,12 +7,13 @@ import (
 )
 
 type User struct {
-	Username string
-	Success  bool
+	Username   string
+	Difficulty string
+	Success    bool
 }
 
 var details = User{
-	Username: "none",
+	Username: "",
 	Success:  false,
 }
 
@@ -35,14 +36,18 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		tmpl1.Execute(w, nil)
 		return
 	}
-	details.Username = r.FormValue("difficulte")
+	details.Username = r.FormValue("Username")
+	details.Difficulty = r.FormValue("Difficulty")
 	fmt.Println(details.Username)
+	fmt.Println(details.Difficulty)
 	details.Success = true
 	tmpl1.Execute(w, details)
 
 }
 
 func gameHandler(w http.ResponseWriter, r *http.Request) {
+	details.Username = r.FormValue("Username")
+	details.Difficulty = r.FormValue("Difficulty")
 	tmpl1 := template.Must(template.ParseFiles("game.html"))
 	tmpl1.Execute(w, details)
 }
