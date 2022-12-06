@@ -17,10 +17,8 @@
         </div>
         <div class = "formulaire">
             <form method="POST" action="">
-                <label>Proposez une lettre:</label>
-                <br>
-                
-                <input type="text" name="LetterTry" maxlength="1" required><br />
+                <label>Proposez une lettre:</label> <br>
+                <input type="text" name="LetterTry" maxlength="1" id = "letter" required><br />
                 <p>Nombre d'essais restants : {{.TryNumber}}</p>
                 <input class = "Essayer une lettre" type="submit" size = 20 value="Essayer">
             </form>
