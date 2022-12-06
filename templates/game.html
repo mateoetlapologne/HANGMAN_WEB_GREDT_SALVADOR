@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    
     <!--French Display version-->
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Difficultée {{.Difficulty}} | Jeu du pendu</title>
+
 </head>
 <body>
     <div class="background">
@@ -16,11 +16,15 @@
                 Bonne chance !</h1>
         </div>
         <div class = "formulaire">
-            <form method="POST" action="">
-                <label>Proposez une lettre:</label> <br>
-                <input type="text" name="LetterTry" maxlength="1" id = "letter" required><br />
+            <form method="post">
+                <label>Proposez une lettre:</label>
+                <br>
+                
+                <input type="text" name="LetterTry" maxlength="1" required><br />
                 <p>Nombre d'essais restants : {{.TryNumber}}</p>
                 <input class = "Essayer une lettre" type="submit" size = 20 value="Essayer">
+                <input type="hidden" name="Username" value="{{.Username}}">
+                <input type="hidden" name="Difficulty" value="{{.Difficulty}}">
             </form>
             <LetterTry>
                 <p>Vous avez déjà essayé les lettres suivantes : {{.LetterTry}}</p>

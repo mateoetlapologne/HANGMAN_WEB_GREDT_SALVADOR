@@ -15,9 +15,11 @@ type User struct {
 }
 
 var details = User{
-	TryNumber: 11,
-	LetterTry: []string{},
-	Success:   false,
+	Username:   "",
+	Difficulty: "",
+	TryNumber:  11,
+	LetterTry:  []string{},
+	Success:    false,
 }
 
 func main() {
@@ -35,19 +37,18 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl1 := template.Must(template.ParseFiles("index.html"))
+	tmpl1 := template.Must(template.ParseFiles("templates/index.html"))
 	if r.Method != http.MethodPost {
 		tmpl1.Execute(w, nil)
 		return
 	}
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
-	details.Success = true
+	//details.Success = true
 	tmpl1.Execute(w, details)
 }
 
 func gameHandler(w http.ResponseWriter, r *http.Request) {
-	details.Success = false
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
 	details.TryNumber--
@@ -60,6 +61,6 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(details.LetterTry)
 
 	//gestion html
-	tmpl1 := template.Must(template.ParseFiles("game.html"))
+	tmpl1 := template.Must(template.ParseFiles("templates/game.html"))
 	tmpl1.Execute(w, details)
 }
