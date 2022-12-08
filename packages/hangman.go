@@ -2,6 +2,7 @@ package hangman
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"math/rand"
 	"os"
@@ -18,7 +19,16 @@ type HangManData struct {
 
 func main() {
 	h := HangManData{}
-	h.Init()
+	path := os.Args[1]
+	h.Attempts = 10
+	h.ToFind = RandomWord(path)
+	// for _, v := range h.ToFind {
+	// 	h.Word += "_"
+	// 	_ = v //to avoid the error
+	// }
+	n := (len(h.ToFind) / 2) - 1
+	h.KnownLetters = append(h.KnownLetters, string(h.ToFind[n]))
+	h.Updateword()
 }
 
 func (h *HangManData) Init() { //func to initialize the game
@@ -35,6 +45,7 @@ func (h *HangManData) Init() { //func to initialize the game
 }
 
 func (h *HangManData) Game(entry string) int { //func to play the game
+	fmt.Println("Debug h.Game", entry, "\n", h.ToFind, "\n", h.Word, "\n", h.Attempts, "\n", h.KnownLetters, "\n", h.TriedLetters)
 	if len(entry) == 1 {
 		if Isintheword(h.ToFind, entry) {
 			if AlreadyKnown(h, entry) {

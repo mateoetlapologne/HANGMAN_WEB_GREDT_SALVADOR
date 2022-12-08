@@ -20,8 +20,6 @@ type User struct {
 var details = User{
 	Username:   "",
 	Difficulty: "",
-	TryNumber:  11,
-	LetterTry:  []string{},
 	Success:    false,
 }
 
@@ -34,8 +32,8 @@ func main() {
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
 	h := hangman.HangManData{}
 	h.Init()
-	details.Word = h.ToFind
-	details.WordDisplay = h.Word
+	// details.Word = h.ToFind
+	// details.WordDisplay = h.Word
 
 	//gestion html
 	http.HandleFunc("/", indexHandler)
@@ -60,34 +58,14 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
 	h.Game(r.FormValue("LetterTry"))
-	details.TryNumber--
-	//details.LetterTry = append(details.LetterTry, r.FormValue("LetterTry"))
-	//debug pour voir les valeurs
-	fmt.Println("Lettre deja tentée", details.LetterTry)
 	fmt.Println("Lettre entrée ", r.FormValue("LetterTry"))
-	fmt.Println("Mot à trouver ", details.Word)
-	fmt.Println("Affichage ", details.WordDisplay)
+	fmt.Println("Mot à trouver ", h.Word)
+	fmt.Println("Affichage ", h.ToFind)
+	fmt.Println("Lettres connues ", h.KnownLetters)
 	fmt.Println("Il vous reste ", h.Attempts, " tentatives")
-	if h.Word == h.ToFind || h.Attempts == 0 {
-		fmt.Println("Vous avez gagné !")
-	}
-	if h.Game(r.FormValue("LetterTry")) == 1 {
-		fmt.Println("Vous avez déjà essayé cette lettre")
-	}
-	if h.Game(r.FormValue("LetterTry")) == 0 {
-		fmt.Println("Bien joué !")
-	}
-	if h.Game(r.FormValue("LetterTry")) == 2 {
-		fmt.Println("La lettre ", r.FormValue("LetterTry"), " n'est pas dans le mot")
-	}
-	if h.Game(r.FormValue("LetterTry")) == 3 {
-		fmt.Println("Vous avez perdu !")
-	}
-	if h.Game(r.FormValue("LetterTry")) == 4 {
-		fmt.Println("Vous avez gagné !")
-	}
-	if h.Word == h.ToFind {
-		fmt.Println("Vous avez gagné !")
+	fmt.Println("Vous avez déjà tenté ")
+	for _, v := range h.TriedLetters {
+		fmt.Println(v)
 	}
 	//gestion html
 	tmpl1 := template.Must(template.ParseFiles("templates/game.html"))
