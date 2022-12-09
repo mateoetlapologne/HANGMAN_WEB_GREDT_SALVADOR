@@ -11,12 +11,13 @@ type User struct {
 	Username    string
 	Difficulty  string
 	Word        string
-	WordDisplay string
-	TryNumber   int
+	ToFind      string
+	Attempts    int
 	LetterTry   []string
-	Success     bool
-	Data        hangman.HangManData
+	LetterKnown []string
 }
+
+var h hangman.HangManData
 
 var details = User{
 	Username:   "",
@@ -26,15 +27,10 @@ var details = User{
 func main() {
 	//démarage serveur
 	fmt.Println("Server is running on port 80 http://localhost")
-
 	//gestion css
 	fs := http.FileServer(http.Dir("css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
-	h := hangman.HangManData{}
-	details.Data = h.Init()
-	// details.Word = h.ToFind
-	// details.WordDisplay = h.Word
-
+	h.Init()
 	//gestion html
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/game", gameHandler)
@@ -54,16 +50,20 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func gameHandler(w http.ResponseWriter, r *http.Request) {
-	h := hangman.HangManData{}
+	h.Game(r.FormValue("LetterTry"))
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
-	h.Game(r.FormValue("LetterTry"), details.Data)
+	details.Word = h.Word
+	details.ToFind = h.ToFind
+	details.Attempts = h.Attempts
+	details.LetterTry = h.TriedLetters
+	details.LetterKnown = h.KnownLetters
 	fmt.Println("Lettre entrée ", r.FormValue("LetterTry"))
-	fmt.Println("Mot à trouver ", details.Data.ToFind)
-	fmt.Println("Affichage ", details.Data.Word)
-	fmt.Println("Lettres connues ", details.Data.KnownLetters)
-	fmt.Println("Vous avez déjà tenté ", details.Data.TriedLetters)
-	fmt.Println("Il vous reste ", details.Data.Attempts, " tentatives")
+	fmt.Println("Mot à trouver ", h.ToFind)
+	fmt.Println("Affichage ", h.Word)
+	fmt.Println("Lettres connues ", h.KnownLetters)
+	fmt.Println("Vous avez déjà tenté ", h.TriedLetters)
+	fmt.Println("Il vous reste ", h.Attempts, " tentatives")
 	for _, v := range h.TriedLetters {
 		fmt.Println(v)
 	}
