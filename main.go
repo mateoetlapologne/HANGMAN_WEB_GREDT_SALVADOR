@@ -25,7 +25,7 @@ var h hangman.HangManData
 var details = User{
 	Username:   "",
 	Difficulty: "",
-	// Display:    "Bienvenue dans le jeu du pendu, vous devez trouver le mot caché en entrant une lettre à la fois. Vous avez 10 tentatives pour trouver le mot. Bonne chance !, Si vous tentez un mot entier, vous perdez deux tentatives",
+	Display:    "Bienvenue dans le jeu du pendu, vous devez trouver le mot caché en entrant une lettre à la fois. Vous avez 10 tentatives pour trouver le mot. Bonne chance !, Si vous tentez un mot entier, vous perdez deux tentatives",
 }
 
 func main() {
@@ -58,33 +58,41 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
-	details.Display = "Bienvenue dans le jeu du pendu, vous devez trouver le mot caché en entrant une lettre à la fois. Vous avez 10 tentatives pour trouver le mot. Bonne chance !, Si vous tentez un mot entier, vous perdez deux tentatives"
 	//details.Success = true
 	tmpl1.Execute(w, details)
 }
 
 func gameHandler(w http.ResponseWriter, r *http.Request) {
-	if IsLetter(r.FormValue("LetterTry")) == true {
-		h.Game(strings.ToLower(r.FormValue("LetterTry")))
-		details.Username = r.FormValue("Username")
-		details.Difficulty = r.FormValue("Difficulty")
-		details.Word = h.Word
-		details.ToFind = h.ToFind
-		details.Attempts = h.Attempts
-		details.LetterTry = h.TriedLetters
-		details.LetterKnown = h.KnownLetters
-		details.Display = h.Message
-		fmt.Println("Lettre entrée ", r.FormValue("LetterTry"))
-		fmt.Println("Mot à trouver ", h.ToFind)
-		fmt.Println("Affichage ", h.Word)
-		fmt.Println("Lettres connues ", h.KnownLetters)
-		fmt.Println("Vous avez déjà tenté ", h.TriedLetters)
-		fmt.Println("Il vous reste ", h.Attempts, " tentatives")
-		for _, v := range h.TriedLetters {
-			fmt.Println(v)
-		}
+	if h.Word == h.ToFind {
+		details.Display = "Vous avez gagné !"
+	}
+	if h.Attempts == 0 {
+		details.Display = "Vous avez perdu !"
 	} else {
-		details.Display = "Vous devez entrer une lettre"
+		if IsLetter(r.FormValue("LetterTry")) == true {
+			h.Game(strings.ToLower(r.FormValue("LetterTry")))
+			details.Username = r.FormValue("Username")
+			details.Difficulty = r.FormValue("Difficulty")
+			details.Word = h.Word
+			details.ToFind = h.ToFind
+			details.Attempts = h.Attempts
+			details.LetterTry = h.TriedLetters
+			details.LetterKnown = h.KnownLetters
+			details.Display = h.Message
+			fmt.Println(details.Display)
+			fmt.Println("Lettre entrée ", r.FormValue("LetterTry"))
+			fmt.Println("Mot à trouver ", h.ToFind)
+			fmt.Println("Affichage ", h.Word)
+			fmt.Println("Lettres connues ", h.KnownLetters)
+			fmt.Println("Vous avez déjà tenté ", h.TriedLetters)
+			fmt.Println("Il vous reste ", h.Attempts, " tentatives")
+			for _, v := range h.TriedLetters {
+				fmt.Println(v)
+			}
+
+		} else {
+			details.Display = "Vous devez entrer une lettre"
+		}
 	}
 	//gestion html
 	tmpl1 := template.Must(template.ParseFiles("templates/game.html"))
