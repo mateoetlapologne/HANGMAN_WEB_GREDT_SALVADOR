@@ -31,7 +31,7 @@ func main() {
 	h.Updateword()
 }
 
-func (h *HangManData) Init() { //func to initialize the game
+func (h *HangManData) Init() HangManData { //func to initialize the game
 	path := os.Args[1]
 	h.Attempts = 10
 	h.ToFind = RandomWord(path)
@@ -42,10 +42,11 @@ func (h *HangManData) Init() { //func to initialize the game
 	n := (len(h.ToFind) / 2) - 1
 	h.KnownLetters = append(h.KnownLetters, string(h.ToFind[n]))
 	h.Updateword()
+	return *h
 }
 
 func (h *HangManData) Game(entry string) int { //func to play the game
-	fmt.Println("Debug h.Game", entry, "\n", h.ToFind, "\n", h.Word, "\n", h.Attempts, "\n", h.KnownLetters, "\n", h.TriedLetters)
+	fmt.Println("Debug h.Game\n", entry, "\n", h.ToFind, "\n", h.Word, "\n", h.Attempts, "\n", h.KnownLetters, "\n", h.TriedLetters)
 	if len(entry) == 1 {
 		if Isintheword(h.ToFind, entry) {
 			if AlreadyKnown(h, entry) {

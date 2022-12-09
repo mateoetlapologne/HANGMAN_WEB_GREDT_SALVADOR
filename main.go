@@ -57,6 +57,7 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 	h := hangman.HangManData{}
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
+	h.Init()
 	h.Game(r.FormValue("LetterTry"))
 	fmt.Println("Lettre entrée ", r.FormValue("LetterTry"))
 	fmt.Println("Mot à trouver ", h.Word)
