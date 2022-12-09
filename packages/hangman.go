@@ -72,7 +72,6 @@ func (h *HangManData) Game(entry string) { //func to play the game
 	}
 }
 func Isintheword(word string, letter string) bool { //func to check if the letter is in the word
-	string.ToLower(letter)
 	for _, v := range word {
 		if string(v) == letter {
 			return true
