@@ -37,14 +37,9 @@ func (h *HangManData) Init() { //func to initialize the game
 	path := os.Args[1]
 	h.Attempts = 10
 	h.ToFind = RandomWord(path)
-	// for _, v := range h.ToFind {
-	// 	h.Word += "_"
-	// 	_ = v //to avoid the error
-	// }
 	n := (len(h.ToFind) / 2) - 1
 	h.KnownLetters = append(h.KnownLetters, string(h.ToFind[n]))
 	h.Updateword()
-	// return *h
 }
 
 func (h *HangManData) Game(entry string) { //func to play the game
@@ -77,6 +72,7 @@ func (h *HangManData) Game(entry string) { //func to play the game
 	}
 }
 func Isintheword(word string, letter string) bool { //func to check if the letter is in the word
+	string.ToLower(letter)
 	for _, v := range word {
 		if string(v) == letter {
 			return true
