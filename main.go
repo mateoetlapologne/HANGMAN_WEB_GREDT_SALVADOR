@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	hangman "serv-hangman/packages"
+	"strings"
 )
 
 type User struct {
@@ -15,6 +16,7 @@ type User struct {
 	Attempts    int
 	LetterTry   []string
 	LetterKnown []string
+	Display     string
 }
 
 var h hangman.HangManData
@@ -22,6 +24,7 @@ var h hangman.HangManData
 var details = User{
 	Username:   "",
 	Difficulty: "",
+	// Display:    "Bienvenue dans le jeu du pendu, vous devez trouver le mot caché en entrant une lettre à la fois. Vous avez 10 tentatives pour trouver le mot. Bonne chance !, Si vous tentez un mot entier, vous perdez deux tentatives",
 }
 
 func main() {
@@ -45,12 +48,13 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
+	details.Display = "Bienvenue dans le jeu du pendu, vous devez trouver le mot caché en entrant une lettre à la fois. Vous avez 10 tentatives pour trouver le mot. Bonne chance !, Si vous tentez un mot entier, vous perdez deux tentatives"
 	//details.Success = true
 	tmpl1.Execute(w, details)
 }
 
 func gameHandler(w http.ResponseWriter, r *http.Request) {
-	h.Game(r.FormValue("LetterTry"))
+	h.Game(strings.ToLower(r.FormValue("LetterTry")))
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
 	details.Word = h.Word
@@ -58,6 +62,7 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 	details.Attempts = h.Attempts
 	details.LetterTry = h.TriedLetters
 	details.LetterKnown = h.KnownLetters
+	details.Display = h.Message
 	fmt.Println("Lettre entrée ", r.FormValue("LetterTry"))
 	fmt.Println("Mot à trouver ", h.ToFind)
 	fmt.Println("Affichage ", h.Word)

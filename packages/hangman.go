@@ -52,18 +52,25 @@ func (h *HangManData) Game(entry string) { //func to play the game
 	if len(entry) == 1 {
 		if Isintheword(h.ToFind, entry) {
 			if AlreadyKnown(h, entry) {
+				h.Message = "Vous avez déjà trouvé cette lettre"
 			} else {
 				h.KnownLetters = append(h.KnownLetters, string(entry))
 				h.Updateword()
+				h.Message = "Vous avez trouvé une lettre, Bien joué !"
 			}
 		} else if !Alreadytried(h, entry) {
 			h.Attempts--
 			h.TriedLetters = append(h.TriedLetters, entry)
+			h.Message = "Cette lettre n'est pas dans le mot, essayez encore !, vous perdez un point"
 		} else {
+			h.Message = "Vous avez déjà essayé cette lettre"
 		}
 	} else if len(entry) >= 2 {
 		if entry == h.ToFind {
+			h.Word = h.ToFind
+			h.Message = "Vous avez trouvé le mot, Bravo !"
 		} else {
+			h.Message = "Ce n'est pas le mot, essayez encore !, Vous perdez deux points"
 			h.Attempts--
 			h.Attempts--
 		}
