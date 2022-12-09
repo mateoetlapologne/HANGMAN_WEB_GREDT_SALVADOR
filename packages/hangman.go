@@ -15,6 +15,7 @@ type HangManData struct {
 	Attempts     int
 	KnownLetters []string
 	TriedLetters []string
+	Message      string
 }
 
 func main() {
@@ -45,13 +46,16 @@ func (h *HangManData) Init() HangManData { //func to initialize the game
 	return *h
 }
 
-func (h *HangManData) Game(entry string) int { //func to play the game
+func (h *HangManData) Game(entry string, data HangManData) int { //func to play the game
+	h = &data
 	fmt.Println("Debug h.Game\n", entry, "\n", h.ToFind, "\n", h.Word, "\n", h.Attempts, "\n", h.KnownLetters, "\n", h.TriedLetters)
 	if len(entry) == 1 {
 		if Isintheword(h.ToFind, entry) {
+			fmt.Println(true)
 			if AlreadyKnown(h, entry) {
 				return 1
 			} else {
+				fmt.Println("DebugElse")
 				h.KnownLetters = append(h.KnownLetters, entry)
 				h.Updateword()
 				// fmt.Println("Bien joué !")
@@ -59,7 +63,7 @@ func (h *HangManData) Game(entry string) int { //func to play the game
 			}
 		} else if !Alreadytried(h, entry) {
 			h.Attempts--
-			// fmt.Println("La lettre ", entry, " n'est pas dans le mot")
+			fmt.Println("La lettre ", entry, " n'est pas dans le mot")
 			h.TriedLetters = append(h.TriedLetters, entry)
 			return 2
 		} else {

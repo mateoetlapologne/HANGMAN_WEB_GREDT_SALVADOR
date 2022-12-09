@@ -13,7 +13,8 @@
     <div class="background">
         <div class = "titre">
             <h1>Bienvenue {{.Username}} <br>
-                Bonne chance !</h1>
+                Bonne chance !
+            {{.Data}}</h1>
         </div>
         <div>
             {{.WordDisplay}}
@@ -23,11 +24,12 @@
                 <label>Proposez une lettre:</label>
                 <br>
                 
-                <input type="text" name="LetterTry" maxlength="1" required><br />
+                <input type="text" name="LetterTry" required><br />
                 <p>Nombre d'essais restants : {{.TryNumber}}</p>
                 <input class = "Essayer une lettre" type="submit" size = 20 value="Essayer">
                 <input type="hidden" name="Username" value="{{.Username}}">
                 <input type="hidden" name="Difficulty" value="{{.Difficulty}}">
+                <input type="hidden" name="Data" value="{{.Data}}">
             </form>
             <LetterTry>
                 <p>Vous avez déjà essayé les lettres suivantes : {{.LetterTry}}</p>
