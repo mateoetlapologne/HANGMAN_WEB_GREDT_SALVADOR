@@ -28,15 +28,6 @@ var details = User{
 	// Display:    "Bienvenue dans le jeu du pendu, vous devez trouver le mot caché en entrant une lettre à la fois. Vous avez 10 tentatives pour trouver le mot. Bonne chance !, Si vous tentez un mot entier, vous perdez deux tentatives",
 }
 
-func IsLetter(s string) bool {
-	for _, r := range s {
-		if !unicode.IsLetter(r) {
-			return false
-		}
-	}
-	return true
-}
-
 func main() {
 	//démarage serveur
 	fmt.Println("Server is running on port 80 http://localhost")
@@ -48,6 +39,15 @@ func main() {
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/game", gameHandler)
 	http.ListenAndServe(":80", nil)
+}
+
+func IsLetter(s string) bool {
+	for _, r := range s {
+		if !unicode.IsLetter(r) {
+			return false
+		}
+	}
+	return true
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
