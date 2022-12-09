@@ -28,10 +28,11 @@
             <form method="post">
                 <label>Proposez une lettre:</label>
                 
-                <input type="text" name="LetterTry" required><br />
-                <input class = "Essayer une lettre" type="submit" size = 20 value="Essayer">
+                <input type="text" name="LetterTry" ><br />
+                <input class = "Essayer une lettre" type="submit" size = 20 value="Continuer">
                 <input type="hidden" name="Username" value="{{.Username}}">
                 <input type="hidden" name="Difficulty" value="{{.Difficulty}}">
+                <input type="hidden" name="FLaunch" value="{{.FirstLaunch}}">
             </form>
             <LetterTry>
                 <p>Vous avez déjà essayé les lettres suivantes</p>

@@ -2,14 +2,13 @@ package hangman
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"math/rand"
 	"os"
 	"time"
 )
 
-var h HangManData
+var h *HangManData
 
 type HangManData struct {
 	Word         string
@@ -33,9 +32,11 @@ func main() {
 	h.Updateword()
 }
 
-func (h *HangManData) Init() { //func to initialize the game
-	path := os.Args[1]
+func (h *HangManData) Init(path string) { //func to initialize the game
 	h.Attempts = 10
+	h.KnownLetters = nil
+	h.TriedLetters = nil
+	h.Message = ""
 	h.ToFind = RandomWord(path)
 	n := (len(h.ToFind) / 2) - 1
 	h.KnownLetters = append(h.KnownLetters, string(h.ToFind[n]))
@@ -43,31 +44,37 @@ func (h *HangManData) Init() { //func to initialize the game
 }
 
 func (h *HangManData) Game(entry string) { //func to play the game
-	fmt.Println("Debug h.Game\n", entry, "\n", h.ToFind, "\n", h.Word, "\n", h.Attempts, "\n", h.KnownLetters, "\n", h.TriedLetters)
-	if len(entry) == 1 {
-		if Isintheword(h.ToFind, entry) {
-			if AlreadyKnown(h, entry) {
-				h.Message = "Vous avez déjà trouvé cette lettre"
+	// Debug fmt.Println("Debug h.Game\n", entry, "\n", h.ToFind, "\n", h.Word, "\n", h.Attempts, "\n", h.KnownLetters, "\n", h.TriedLetters)
+	if h.Word == h.ToFind {
+		h.Message = "Vous avez gagné !"
+	} else if h.Attempts == 0 {
+		h.Message = "Vous avez perdu !"
+	} else {
+		if len(entry) == 1 {
+			if Isintheword(h.ToFind, entry) {
+				if AlreadyKnown(h, entry) {
+					h.Message = "Vous avez déjà trouvé cette lettre"
+				} else {
+					h.KnownLetters = append(h.KnownLetters, string(entry))
+					h.Updateword()
+					h.Message = "Vous avez trouvé une lettre, Bien joué !"
+				}
+			} else if !Alreadytried(h, entry) {
+				h.Attempts--
+				h.TriedLetters = append(h.TriedLetters, entry)
+				h.Message = "Cette lettre n'est pas dans le mot, essayez encore !, vous perdez un point"
 			} else {
-				h.KnownLetters = append(h.KnownLetters, string(entry))
-				h.Updateword()
-				h.Message = "Vous avez trouvé une lettre, Bien joué !"
+				h.Message = "Vous avez déjà essayé cette lettre"
 			}
-		} else if !Alreadytried(h, entry) {
-			h.Attempts--
-			h.TriedLetters = append(h.TriedLetters, entry)
-			h.Message = "Cette lettre n'est pas dans le mot, essayez encore !, vous perdez un point"
-		} else {
-			h.Message = "Vous avez déjà essayé cette lettre"
-		}
-	} else if len(entry) >= 2 {
-		if entry == h.ToFind {
-			h.Word = h.ToFind
-			h.Message = "Vous avez trouvé le mot, Bravo !"
-		} else {
-			h.Message = "Ce n'est pas le mot, essayez encore !, Vous perdez deux points"
-			h.Attempts--
-			h.Attempts--
+		} else if len(entry) >= 2 {
+			if entry == h.ToFind {
+				h.Word = h.ToFind
+				h.Message = "Vous avez trouvé le mot, Bravo !"
+			} else {
+				h.Message = "Ce n'est pas le mot, essayez encore !, Vous perdez deux points"
+				h.Attempts--
+				h.Attempts--
+			}
 		}
 	}
 }
