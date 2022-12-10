@@ -14,6 +14,8 @@ type User struct {
 	Difficulty  string
 	Word        string
 	ToFind      string
+	Win         int
+	Lose        int
 	Attempts    int
 	LetterTry   []string
 	LetterKnown []string
@@ -26,6 +28,8 @@ var details = User{
 	Username:   "",
 	Difficulty: "",
 	Attempts:   11,
+	Win:        5,
+	Lose:       3,
 }
 
 func main() {
@@ -96,8 +100,10 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		if h.Word == h.ToFind {
 			details.Display = "Vous avez gagné !"
+			details.Win++
 		} else if h.Attempts == 0 {
 			details.Display = "Vous avez perdu ! Le mot était " + h.Word
+			details.Lose++
 		} else {
 			details.Display = "Vous devez entrer une lettre"
 		}
