@@ -9,23 +9,28 @@
     <title>Menu Principal | Pendu</title>
 </head>
 <body>
-    <h1>Bienvenue sur le jeu du pendu !<br>
-        Veuillez remplir les champs ci-dessous pour jouer</h1>
-    <div class = "formulaire">
-        <form method="POST" action = "/game">
-            <label for="name">Entrez votre pseudo</label>
-            <br>
-            <input type="text" name="Username" id="Username" required>
-            <br>
-            <input type="radio" id="easy" name="Difficulty" value="Facile">
-            <label for="facile">Facile</label>
-            <input type="radio" id="normal" name="Difficulty" value="Moyenne" checked>
-            <label for="moyen">Moyen</label>
-            <input type="radio" id="hard" name="Difficulty" value="Difficile">
-            <label for="difficile">Difficile</label>
-            <br>
-            <input type="submit" value="Commencer">
-        </form>
+    <div class = "background">
+        <h1>Bienvenue sur le jeu du pendu !<br>
+            Veuillez remplir les champs ci-dessous pour jouer
+        </h1> <br>
+        <div class = "menu">
+            <form class = "index" method="POST" action = "/game">
+                <div class = "titre">
+                    <label for="name">Entrez votre pseudo:</label> <br>
+                    <input class = "pseudo" type="text" name="Username" id="Username" required> <br>
+                </div>
+                <div class = "choix">
+                    <label for="difficulty">Choisissez la difficultée:</label>
+                    <input class = "rond" type="radio" id="easy" name="Difficulty" value="Facile">
+                    <label for="facile">Facile</label>
+                    <input class = "rond" type="radio" id="normal" name="Difficulty" value="Moyenne" checked>
+                    <label for="moyen">Moyen</label>
+                    <input class = "rond" type="radio" id="hard" name="Difficulty" value="Difficile">
+                    <label for="difficile">Difficile</label> 
+                </div>
+                <input type="submit" class = "start" value="Commencer">
+            </form>
+        </div>
     </div>
 </body>
 </html>
