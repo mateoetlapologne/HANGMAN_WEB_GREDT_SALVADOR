@@ -1,5 +1,4 @@
-/* styles.css */
-
+/*Page Index.html*/
 
 body, html {
   height: 100%;
@@ -9,9 +8,10 @@ body, html {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
-h1 {
+.bienvenue {
   text-align: center;
   font-family: 'Times New Roman', Times, serif;
   font-size: bolder;
@@ -73,14 +73,14 @@ h1 {
 
 input[type="radio"] { -ms-transform: scale(1.5); /* IE 9 */ -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */ transform: scale(1.5); } 
 
-.background {
+.background1 {
   height: 100%;
-  background: linear-gradient(130deg,#ec19d0,#646233,#ef0787,#342ba3);
+  background: linear-gradient(78deg,#50ca7f,#b97006,#12fd4b,#e4b421);
   background-size: 240% 240%;
-  animation: gradient-animation 8s ease infinite;
-  }
-  
-  @keyframes gradient-animation {
+  animation: gradient-animation 40s ease infinite;
+}
+
+@keyframes gradient-animation {
   0% {
     background-position: 0% 50%;
   }
@@ -90,4 +90,73 @@ input[type="radio"] { -ms-transform: scale(1.5); /* IE 9 */ -webkit-transform: s
   100% {
     background-position: 0% 50%;
   }
+}
+
+
+/*Page game.html*/
+
+.background {
+  height: 100%;
+  width: 100%;
+
+}
+
+/* séparé la page en 2 div droite et gauche */
+.gauche {
+width: 50%;
+height: 100%;
+float: left;
+}
+
+.droite {
+  width: 50%;
+  height: 100%;
+  float: right;
+  border-left: 1px solid black;
+  
+}
+
+/* séparé la div gauche en 2 div haut et bas */
+
+.haut {
+  width: 100%;
+  height: 50%;
+  float: left;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.ATrouver {
+  font-size: 50px;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 20px;
+}
+
+.Essaie {
+  font-size: 30px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.bas {
+  width: 100%;
+  height: 50%;
+  float: right;
+  
+}
+
+.Lettre {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  
+}
+
+.ProposezLettre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

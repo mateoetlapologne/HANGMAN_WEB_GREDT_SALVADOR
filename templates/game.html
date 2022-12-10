@@ -11,31 +11,33 @@
 </head>
 <body>
     <div class="background">
-        <div class = "titre">
+        <div class = "droite">
             <h1>Bienvenue {{.Username}} <br>
-                Bonne chance !</h1>
-        </div> 
-        <div>
-           <p>Nombre d'essais restants : {{.Attempts}} </p>
-           <label>Mot : {{.Word}}</label>
-           <label>Affichage : {{.ToFind}}</label>
-           <label>Lettre essayé : {{.LetterTry}}</label>
-           <label>Lettre connue : {{.LetterKnown}}</label>
-           <label>Essais : {{.Attempts}}</label>
-           <label>{{.Display}}</label>
+                Bonne chance !
+            </h1>
         </div>
-        <div class = "formulaire">
-            <form method="post">
-                <label>Proposez une lettre:</label>
-                
-                <input type="text" name="LetterTry" ><br />
-                <input class = "Essayer une lettre" type="submit" size = 20 value="Continuer">
-                <input type="hidden" name="Username" value="{{.Username}}">
-                <input type="hidden" name="Difficulty" value="{{.Difficulty}}">
-                <input type="hidden" name="FLaunch" value="{{.FirstLaunch}}">
-            </form>
-            <LetterTry>
-                <p>Vous avez déjà essayé les lettres suivantes</p>
+        <div class = "gauche">
+            <div class= "haut">
+                <label class = "ATrouver">Mot : {{.Word}}</label>
+                <label>Affichage : {{.ToFind}}</label>
+                <label class = "Essaie"> Nombre d'essais restants : {{.Attempts}} </label>
+            </div>
+            <div class = "bas">
+                <div class = "Lettre">
+                    <label>Lettre fausse : {{.LetterTry}}</label>
+                    <label>Lettre connue : {{.LetterKnown}}</label>
+                </div>
+                <form method="post">
+                    <div class = "ProposezLettre">
+                        <label>Proposez une lettre:</label>
+                        <input type="text" name="LetterTry"> <br>
+                    </div>
+                    <input class = "Continuer" type="submit" size = 20 value="Continuer">
+                    <input type="hidden" name="Username" value="{{.Username}}">
+                    <input type="hidden" name="Difficulty" value="{{.Difficulty}}">
+                    <input type="hidden" name="FLaunch" value="{{.FirstLaunch}}">
+                </form>
+            </div>  
         </div>
-        <br>
+    </div>
 </body>
