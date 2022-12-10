@@ -66,7 +66,6 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 	if details.Attempts == 11 {
 		fmt.Println("FirstLaunch")
 		h = hangman.HangManData{}
-		details.Attempts = 10
 		fmt.Println("difficulté :" + details.Difficulty)
 		if details.Difficulty == "Facile" {
 			h.Init("words.txt")
