@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	hangman "serv-hangman/packages"
+	"strconv"
 	"strings"
 	"unicode"
 )
@@ -20,6 +21,7 @@ type User struct {
 	LetterTry   []string
 	LetterKnown []string
 	Display     string
+	Img         string
 }
 
 var h hangman.HangManData
@@ -28,8 +30,6 @@ var details = User{
 	Username:   "",
 	Difficulty: "",
 	Attempts:   11,
-	Win:        5,
-	Lose:       3,
 }
 
 func main() {
@@ -38,6 +38,9 @@ func main() {
 	//gestion css
 	fs := http.FileServer(http.Dir("css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
+	//gestion img
+	img := http.FileServer(http.Dir("img"))
+	http.Handle("/img/", http.StripPrefix("/img/", img))
 	//gestion html
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/game", gameHandler)
@@ -85,24 +88,15 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 		details.LetterTry = h.TriedLetters
 		details.LetterKnown = h.KnownLetters
 		details.Display = h.Message
-		// Debug on sait jamais mdr
-		// fmt.Println(details.Display)
-		// fmt.Println("Lettre entrée ", r.FormValue("LetterTry"))
-		// fmt.Println("Mot à trouver ", h.ToFind)
-		// fmt.Println("Affichage ", h.Word)
-		// fmt.Println("Lettres connues ", h.KnownLetters)
-		// fmt.Println("Vous avez déjà tenté ", h.TriedLetters)
-		// fmt.Println("Il vous reste ", h.Attempts, " tentatives")
 		if h.Word == h.ToFind {
-			details.Display = "Vous avez gagné !"
 			details.Win++
 		} else if h.Attempts <= 0 {
-			details.Display = "Vous avez perdu ! Le mot était " + h.Word
 			details.Lose++
 		} else {
 			details.Display = "Vous devez entrer une lettre"
 		}
 	}
+	details.Img = "/img/" + strconv.Itoa(h.Attempts) + ".png"
 	//gestion html
 	tmpl1 := template.Must(template.ParseFiles("templates/game.html"))
 	tmpl1.Execute(w, details)
