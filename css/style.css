@@ -112,7 +112,7 @@ float: left;
   width: 50%;
   height: 100%;
   float: right;
-  border-left: 1px solid black;
+  border-left: 2px solid black;
   
 }
 
@@ -122,7 +122,7 @@ float: left;
   width: 100%;
   height: 50%;
   float: left;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,18 +145,28 @@ float: left;
   width: 100%;
   height: 50%;
   float: right;
-  
 }
 
-.Lettre {
+
+
+/* mettre la div lettre en bas de la div bas */
+
+.Statlettre {
+  font-size: 30px;
+  font-family: 'Times New Roman', Times, serif;
+  margin-top: 20px;
   display: flex;
-  align-items: flex-end;
   justify-content: space-around;
-  
 }
 
-.ProposezLettre {
+.inputlettre {
+  height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 40px;
+  font-family: 'Times New Roman', Times, serif;
+
+
 }

@@ -23,11 +23,11 @@
                 <label class = "Essaie"> Nombre d'essais restants : {{.Attempts}} </label>
             </div>
             <div class = "bas">
-                <div class = "Lettre">
+                <div class = "Statlettre">
                     <label>Lettre fausse : {{.LetterTry}}</label>
                     <label>Lettre connue : {{.LetterKnown}}</label>
                 </div>
-                <form method="post">
+                <form class = "inputlettre" method="post">
                     <div class = "ProposezLettre">
                         <label>Proposez une lettre:</label>
                         <input type="text" name="LetterTry"> <br>
