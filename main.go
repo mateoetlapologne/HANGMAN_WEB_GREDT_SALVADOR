@@ -67,7 +67,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 func gameHandler(w http.ResponseWriter, r *http.Request) {
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
-	if details.Attempts == 11 {
+	if details.Attempts == 11 || details.Attempts <= 0 || details.Word == details.ToFind {
 		h = hangman.HangManData{}
 		if details.Difficulty == "Facile" {
 			h.Init("words.txt")
@@ -96,7 +96,7 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 		if h.Word == h.ToFind {
 			details.Display = "Vous avez gagné !"
 			details.Win++
-		} else if h.Attempts == 0 {
+		} else if h.Attempts <= 0 {
 			details.Display = "Vous avez perdu ! Le mot était " + h.Word
 			details.Lose++
 		} else {
