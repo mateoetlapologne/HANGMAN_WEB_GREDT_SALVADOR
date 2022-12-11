@@ -22,6 +22,7 @@ type User struct {
 	LetterKnown []string
 	Display     string
 	Img         string
+	Winrate     float64
 }
 
 var h hangman.HangManData
@@ -97,6 +98,9 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	details.Img = "/img/" + strconv.Itoa(h.Attempts) + ".png"
+	if details.Win != 0 || details.Lose != 0 {
+		details.Winrate = float64(details.Win) / float64(details.Lose) * 100
+	}
 	//gestion html
 	tmpl1 := template.Must(template.ParseFiles("templates/game.html"))
 	tmpl1.Execute(w, details)
