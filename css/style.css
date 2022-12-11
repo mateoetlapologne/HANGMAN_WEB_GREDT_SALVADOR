@@ -107,6 +107,66 @@ input[type="radio"] { -ms-transform: scale(1.5); /* IE 9 */ -webkit-transform: s
 
 }
 
+.textdroite {
+  font-size: 35px;
+  margin-top: 15%;
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.visible {
+  visibility: visible;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  background-color: #5751aa;
+}
+
+.none {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #3a423c;
+}
+
+.rejouer {
+  border-radius: 10px;
+  font-size: 20px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding: 3px;
+  margin-top: 10px;
+  cursor: pointer;
+
+}
+
+.rejouer:hover {
+  background-color: #144415;
+  color: white;
+}
+
 /* séparé la page en 2 div droite et gauche */
 .gauche {
   width: 50%;
@@ -124,10 +184,6 @@ input[type="radio"] { -ms-transform: scale(1.5); /* IE 9 */ -webkit-transform: s
   
 }
 
-.textdroite {
-  text-align: center;
-  margin-top: 15px;
-}
 
 
 @keyframes cube {
@@ -187,6 +243,15 @@ input[type="radio"] { -ms-transform: scale(1.5); /* IE 9 */ -webkit-transform: s
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
+}
+
+.ProposezLettre {
+  font-size: 30px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .inputlettre {

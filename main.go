@@ -32,7 +32,7 @@ var details = User{
 	Username:   "",
 	Difficulty: "",
 	Attempts:   11,
-	GameEnd:    "hidden",
+	GameEnd:    "none",
 }
 
 func main() {
@@ -75,7 +75,7 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 	details.Difficulty = r.FormValue("Difficulty")
 	if details.Attempts == 11 || details.Attempts <= 0 || details.Word == details.ToFind {
 		h = hangman.HangManData{}
-		details.GameEnd = "hidden"
+		details.GameEnd = "none"
 		if details.Difficulty == "Facile" {
 			h.Init("words.txt")
 		} else if details.Difficulty == "Moyenne" {
@@ -98,7 +98,6 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 			details.GameEnd = "visible"
 		} else if h.Attempts <= 0 {
 			details.Lose++
-			h.ToFind = h.Word
 			details.GameEnd = "visible"
 		} else {
 			details.Display = "Vous devez entrer une lettre"

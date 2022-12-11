@@ -10,23 +10,24 @@
 
 </head>
 <body>
-    <div visibility: {{.GameEnd}}>
-        <h1>La partie est terminée<br>
-            Le mot était {{.Word}} !</h1>
-        </h1>
-        <form method="post" action="/game">
-            <input type="hidden" name="Username" value="{{.Username}}">
-            <input type="hidden" name="Difficulty" value="{{.Difficulty}}">
-            <input type="submit" value="Rejouer">
-    </div>
     <div class="background">
+        <div class = "{{.GameEnd}}">
+            <h1>La partie est terminée<br>
+                Le mot était "{{.ToFind}}" !</h1>
+            </h1>
+            <form method="post" action="/game">
+                <input type="hidden" name="Username" value="{{.Username}}">
+                <input type="hidden" name="Difficulty" value="{{.Difficulty}}">
+                <input class = "rejouer" type="submit" value="Rejouer">
+            </form>
+        </div>
         <div class = "droite">
             <h1 class = "textdroite">Bienvenue {{.Username}} <br>
                 Bonne chance ! <br>
                 Win : {{.Win}} <br>
                 Lose : {{.Lose}} <br>
                 Taux de Reussite : {{.Winrate}} %<br>
-                <img src="{{.Img}}" alt="pendu">
+                <img src="{{.Img}}" alt="pendu" width="750" height="750">
             </h1>
         </div>
         <div class = "gauche">
@@ -43,8 +44,8 @@
                     <div class = "ProposezLettre">
                         <label>Proposez une lettre:</label>
                         <input class = "pseudo" type="text" name="LetterTry"> <br>
+                        <input class = "continuer" type = "submit" value = "Entrez">
                     </div>
-                    <input class = "continuer" type = "submit" value = "Entrez">
                     <input type="hidden" name="Username" value="{{.Username}}">
                     <input type="hidden" name="Difficulty" value="{{.Difficulty}}">
                     <input type="hidden" name="FLaunch" value="{{.FirstLaunch}}">
