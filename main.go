@@ -61,6 +61,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
+	details.Attempts = 11
 	tmpl1.Execute(w, details)
 }
 
@@ -94,11 +95,10 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 		// fmt.Println("Vous avez déjà tenté ", h.TriedLetters)
 		// fmt.Println("Il vous reste ", h.Attempts, " tentatives")
 		if h.Word == h.ToFind {
-			details.Display = "Vous avez gagné !"
 			details.Win++
-		} else if h.Attempts == 0 {
-			details.Display = "Vous avez perdu ! Le mot était " + h.Word
+		} else if h.Attempts <= 0 {
 			details.Lose++
+			details.Attempts = 11
 		} else {
 			details.Display = "Vous devez entrer une lettre"
 		}
