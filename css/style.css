@@ -124,6 +124,10 @@ input[type="radio"] { -ms-transform: scale(1.5); /* IE 9 */ -webkit-transform: s
   
 }
 
+.textdroite {
+  text-align: center;
+  margin-top: 15px;
+}
 
 
 @keyframes cube {

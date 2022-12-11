@@ -10,9 +10,18 @@
 
 </head>
 <body>
+    <div visibility: {{.GameEnd}}>
+        <h1>La partie est terminée<br>
+            Le mot était {{.Word}} !</h1>
+        </h1>
+        <form method="post" action="/game">
+            <input type="hidden" name="Username" value="{{.Username}}">
+            <input type="hidden" name="Difficulty" value="{{.Difficulty}}">
+            <input type="submit" value="Rejouer">
+    </div>
     <div class="background">
         <div class = "droite">
-            <h1>Bienvenue {{.Username}} <br>
+            <h1 class = "textdroite">Bienvenue {{.Username}} <br>
                 Bonne chance ! <br>
                 Win : {{.Win}} <br>
                 Lose : {{.Lose}} <br>

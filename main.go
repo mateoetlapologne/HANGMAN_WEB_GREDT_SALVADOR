@@ -23,6 +23,7 @@ type User struct {
 	Display     string
 	Img         string
 	Winrate     float64
+	GameEnd     string
 }
 
 var h hangman.HangManData
@@ -31,6 +32,7 @@ var details = User{
 	Username:   "",
 	Difficulty: "",
 	Attempts:   11,
+	GameEnd:    "hidden",
 }
 
 func main() {
@@ -73,6 +75,7 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 	details.Difficulty = r.FormValue("Difficulty")
 	if details.Attempts == 11 || details.Attempts <= 0 || details.Word == details.ToFind {
 		h = hangman.HangManData{}
+		details.GameEnd = "hidden"
 		if details.Difficulty == "Facile" {
 			h.Init("words.txt")
 		} else if details.Difficulty == "Moyenne" {
@@ -91,15 +94,19 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 		details.Display = h.Message
 		if h.Word == h.ToFind {
 			details.Win++
+			h.ToFind = h.Word
+			details.GameEnd = "visible"
 		} else if h.Attempts <= 0 {
 			details.Lose++
+			h.ToFind = h.Word
+			details.GameEnd = "visible"
 		} else {
 			details.Display = "Vous devez entrer une lettre"
 		}
 	}
 	details.Img = "/img/" + strconv.Itoa(h.Attempts) + ".png"
 	if details.Win != 0 || details.Lose != 0 {
-		details.Winrate = float64(details.Win) / float64(details.Lose) * 100
+		details.Winrate = float64(details.Win) / float64(details.Win+details.Lose) * 100
 	}
 	//gestion html
 	tmpl1 := template.Must(template.ParseFiles("templates/game.html"))
