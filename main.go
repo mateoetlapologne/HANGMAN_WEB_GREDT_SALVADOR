@@ -68,9 +68,7 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 	details.Username = r.FormValue("Username")
 	details.Difficulty = r.FormValue("Difficulty")
 	if details.Attempts == 11 {
-		fmt.Println("FirstLaunch")
 		h = hangman.HangManData{}
-		fmt.Println("difficulté :" + details.Difficulty)
 		if details.Difficulty == "Facile" {
 			h.Init("words.txt")
 		} else if details.Difficulty == "Moyenne" {
@@ -95,9 +93,6 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 		// fmt.Println("Lettres connues ", h.KnownLetters)
 		// fmt.Println("Vous avez déjà tenté ", h.TriedLetters)
 		// fmt.Println("Il vous reste ", h.Attempts, " tentatives")
-		for _, v := range h.TriedLetters {
-			fmt.Println(v)
-		}
 		if h.Word == h.ToFind {
 			details.Display = "Vous avez gagné !"
 			details.Win++
