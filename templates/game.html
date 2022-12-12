@@ -13,7 +13,7 @@
     <div class="background">
         <div class = "{{.GameEnd}}">
             <h1>La partie est terminée<br>
-                Le mot était "{{.ToFind}}" !</h1>
+                Le mot était "{{.ToFind}}" !
             </h1>
             <form method="post" action="/game">
                 <input type="hidden" name="Username" value="{{.Username}}">
@@ -44,7 +44,7 @@
                     <div class = "ProposezLettre">
                         <label>Proposez une lettre:</label>
                         <input class = "pseudo" type="text" name="LetterTry"> <br>
-                        <input class = "continuer" type = "submit" value = "Entrez">
+                        <input class = "continuer" type = "submit" value = "Entrer">
                     </div>
                     <input type="hidden" name="Username" value="{{.Username}}">
                     <input type="hidden" name="Difficulty" value="{{.Difficulty}}">
