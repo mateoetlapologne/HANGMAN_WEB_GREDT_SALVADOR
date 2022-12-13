@@ -97,6 +97,7 @@ func gameHandler(w http.ResponseWriter, r *http.Request) {
 			h.ToFind = h.Word
 			details.GameEnd = "visible"
 		} else if h.Attempts <= 0 {
+			h.Attempts = 0
 			details.Lose++
 			details.GameEnd = "visible"
 		} else {
