@@ -25,11 +25,14 @@ body, html {
   align-items: center;
   justify-content: center;
   height: 100%;
-
+  color: white;
 }
 
 .pseudo{
-  font-size: 30px;
+  font-size: 25px;
+  border-radius: 20px;
+  border-color: black;
+  padding-left: 10px;
 }
 
 .menu {
@@ -44,12 +47,13 @@ body, html {
 
 
 .index {
+  background-color: #4e5652;
+  border: 2px solid black;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid black;
-  border-radius: 20%;
   padding: 20px;
   width: fit-content;
   height: fit-content;
@@ -57,6 +61,7 @@ body, html {
 }
 
 .choix {
+  color: white;
   font-size: 30px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
@@ -66,14 +71,14 @@ body, html {
   border-radius: 10px;
   font-size: 30px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  padding: 2px;
+  padding: 5px;
   margin-top: 10px;
   cursor: pointer;
 
 }
 
 .start:hover {
-  background-color: #144415;
+  background-color: #086d0f;
   color: white;
 }
 
@@ -159,7 +164,6 @@ input[type="radio"] { -ms-transform: scale(1.5); /* IE 9 */ -webkit-transform: s
   color: white;
 }
 
-/* séparé la page en 2 div droite et gauche */
 .gauche {
   width: 50%;
   height: 100%;
@@ -184,17 +188,6 @@ input[type="radio"] { -ms-transform: scale(1.5); /* IE 9 */ -webkit-transform: s
 
 }
 
-
-@keyframes cube {
-  from {
-      transform: scale(0) rotate(0deg) translate(-50%, -50%);
-      opacity: 1;
-  }
-  to {
-      transform: scale(20) rotate(960deg) translate(-50%, -50%);
-      opacity: 0;
-  }
-}
 
 .haut {
   width: 100%;
@@ -229,10 +222,6 @@ input[type="radio"] { -ms-transform: scale(1.5); /* IE 9 */ -webkit-transform: s
   background: rgb(2,0,36);
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,190,0,1) 0%, rgba(121,100,9,1) 100%);
 }
-
-
-
-/* mettre la div lettre en bas de la div bas */
 
 .Statlettre {
   font-size: 30px;
